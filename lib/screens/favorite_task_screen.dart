@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_app/blocs/bloc_exports.dart';
+import 'package:to_do_app/screens/complete_task_screen.dart';
 import 'package:to_do_app/screens/my_drawer.dart';
+import 'package:to_do_app/screens/pending_screen.dart';
 
 import '../models/task.dart';
 import '../widget/tasks_list.dart';
 import 'add_task_screen.dart';
 
-class TasksScreen extends StatefulWidget {
-    TasksScreen({Key? key}) : super(key: key);
-    static const id = 'tasks_screen';
+class FavoriteTasksScreen extends StatelessWidget {
+  FavoriteTasksScreen({Key? key}) : super(key: key);
+    static const id = 'favorite_tasks_screen';
 
 
-  @override
-  State<TasksScreen> createState() => _TasksScreenState();
-}
 
-class _TasksScreenState extends State<TasksScreen> {
    void _addText(BuildContext context){
      showModalBottomSheet(
          context: context,
@@ -35,7 +33,7 @@ class _TasksScreenState extends State<TasksScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<TasksBloc, TasksState>(
         builder: (context, state){
-          List<Task> tasksList = state.pendingTasks;
+          List<Task> tasksList = state.favoriteTasks;
           return  Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children:  [

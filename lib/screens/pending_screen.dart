@@ -7,16 +7,11 @@ import '../models/task.dart';
 import '../widget/tasks_list.dart';
 import 'add_task_screen.dart';
 
-class TasksScreen extends StatefulWidget {
-    TasksScreen({Key? key}) : super(key: key);
-    static const id = 'tasks_screen';
+class PendingScreen extends StatelessWidget {
+  PendingScreen({Key? key}) : super(key: key);
+    static const id = 'pending_screen';
 
 
-  @override
-  State<TasksScreen> createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
    void _addText(BuildContext context){
      showModalBottomSheet(
          context: context,
@@ -43,7 +38,7 @@ class _TasksScreenState extends State<TasksScreen> {
                 Center(
                   child: Chip(
                     label: Text(
-                      '${tasksList.length} Tasks'
+                      '${tasksList.length} Pending | ${state.completeTasks.length} Complete'
                     ),
                   ),
                 ),

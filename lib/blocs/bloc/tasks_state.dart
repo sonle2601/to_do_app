@@ -1,30 +1,38 @@
 part of 'tasks_bloc.dart';
 
 class TasksState extends Equatable {
-  final List<Task>  allTasks;
+  final List<Task>  pendingTasks;
+  final List<Task>  completeTasks;
+  final List<Task>  favoriteTasks;
+  final List<Task> removedTasks;
    const TasksState({
-     this.allTasks = const <Task>[]
-  });
+     this.pendingTasks = const <Task>[],
+     this.completeTasks = const <Task>[],
+     this.favoriteTasks = const <Task>[],
+     this.removedTasks = const <Task>[]
+});
 
   @override
-  List<Object?> get props => [allTasks];
+  List<Object?> get props => [pendingTasks, completeTasks,favoriteTasks, removedTasks];
 
   Map<String, dynamic> toMap() {
     return {
-      'allTasks': allTasks.map((e) => e.toMap()).toList()
+      'pendingTasks': pendingTasks.map((e) => e.toMap()).toList(),
+      'favoriteTasks': favoriteTasks.map((e) => e.toMap()).toList(),
+      'completeTasks': completeTasks.map((e) => e.toMap()).toList(),
+      'removedTasks': removedTasks.map((e) => e.toMap()).toList()
     };
   }
 
   factory TasksState.fromMap(Map<String, dynamic> map) {
     return TasksState(
-      allTasks: List<Task>.from(map['allTasks']?.map((e) => Task.fromMap(e)))
+        pendingTasks: List<Task>.from(map['pendingTasks']?.map((e) => Task.fromMap(e))),
+        completeTasks: List<Task>.from(map['completeTasks']?.map((e) => Task.fromMap(e))),
+        favoriteTasks: List<Task>.from(map['favoriteTasks']?.map((e) => Task.fromMap(e))),
+        removedTasks: List<Task>.from(map['removedTasks']?.map((e) => Task.fromMap(e)))
     );
   }
 }
 
-class TasksInitial extends TasksState {
-  @override
-  List<Object> get props => [allTasks];
-}
 
 

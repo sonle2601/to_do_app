@@ -4,18 +4,23 @@ import 'package:to_do_app/blocs/bloc_exports.dart';
 import '../models/task.dart';
 import '../services/guid_gen.dart';
 
-class AddTaskScreen extends StatelessWidget {
-   AddTaskScreen({
+class EditTaskScreen extends StatelessWidget {
+  final Task oldTask;
+  EditTaskScreen({
     super.key,
+    required this.oldTask,
   });
 
-  final titleController = TextEditingController();
-   final descriptionController = TextEditingController();
+
+
+
 
 
    @override
   Widget build(BuildContext context) {
 
+     final titleController = TextEditingController(text: oldTask.title);
+     final descriptionController = TextEditingController(text:  oldTask.description);
     return Container(
       padding: EdgeInsets.all(20),
       child: Column(
@@ -51,15 +56,17 @@ class AddTaskScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(onPressed: (){
-                var task = Task(
+                var editedTask = Task(
                     date: DateTime.now().toString(),
                     description: descriptionController.text,
                     title: titleController.text,
-                    id: UUIDGenerator.generate(),
+                    id: oldTask.id,
+                    isDone: false,
+                    isFavorite: oldTask.isFavorite
                 );
-                context.read<TasksBloc>().add(AddTask(task: task));
+                context.read<TasksBloc>().add(EditTask(oldTask: oldTask, newTask: editedTask));
                 Navigator.pop(context);
-                }, child: const Text('Add'),
+                }, child: const Text('Save'),
               ),
               TextButton(onPressed: (){
                 Navigator.pop(context);

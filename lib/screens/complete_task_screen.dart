@@ -7,16 +7,11 @@ import '../models/task.dart';
 import '../widget/tasks_list.dart';
 import 'add_task_screen.dart';
 
-class TasksScreen extends StatefulWidget {
-    TasksScreen({Key? key}) : super(key: key);
-    static const id = 'tasks_screen';
+class CompleteTasksScreen extends StatelessWidget {
+  CompleteTasksScreen({Key? key}) : super(key: key);
+    static const id = 'complete_tasks_screen';
 
 
-  @override
-  State<TasksScreen> createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
    void _addText(BuildContext context){
      showModalBottomSheet(
          context: context,
@@ -35,7 +30,7 @@ class _TasksScreenState extends State<TasksScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<TasksBloc, TasksState>(
         builder: (context, state){
-          List<Task> tasksList = state.pendingTasks;
+          List<Task> tasksList = state.completeTasks;
           return  Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children:  [
